@@ -1,3 +1,4 @@
+#!/bin/bash
 xhost +local:root
 
 XAUTH=/tmp/.docker.xauth
@@ -16,6 +17,7 @@ XAUTH=/tmp/.docker.xauth
 docker stop ARM_02 || true && docker rm ARM_02 || true
 
 docker run -it \
+    -v catkin_ws:/catkin_ws/src \
     --gpus all \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
@@ -27,5 +29,6 @@ docker run -it \
     --privileged \
     --network=host \
     --name="ARM_02" \
-    osrf/ros:noetic-desktop-full \
+    lab02:latest \
     /bin/bash
+    #osrf/ros:noetic-desktop-full \
