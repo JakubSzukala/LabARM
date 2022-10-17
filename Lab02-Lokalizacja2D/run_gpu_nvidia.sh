@@ -1,6 +1,13 @@
 #!/bin/bash
 xhost +local:root
 
+################################################################################
+# Build from instruction in Dockerfile. Shared folder is entire catkin workspace
+# so set it up normally, by sourcing /opt/ros/noetic/setup.bash and running
+# catkin_make in container and then You can do normal from within the workspace
+# source devel/setup.bash. Edit on host and build / run from container.
+################################################################################
+
 XAUTH=/tmp/.docker.xauth
  if [ ! -f $XAUTH ]
  then
@@ -17,7 +24,7 @@ XAUTH=/tmp/.docker.xauth
 docker stop ARM_02 || true && docker rm ARM_02 || true
 
 docker run -it \
-    -v catkin_ws:/catkin_ws/src \
+    -v /home/js/Projects/ARM/MyLabARM/Lab02-Lokalizacja2D/catkin_ws:/catkin_ws \
     --gpus all \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
@@ -31,4 +38,3 @@ docker run -it \
     --name="ARM_02" \
     lab02:latest \
     /bin/bash
-    #osrf/ros:noetic-desktop-full \
