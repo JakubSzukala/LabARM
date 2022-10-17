@@ -10,7 +10,7 @@ FROM osrf/ros:noetic-desktop-full
 ARG USER_ID
 ARG GROUP_ID
 
-RUN echo "source opt/ros/noetic/setup.bash" >> /etc/bash.bashrc
+RUN echo "source /opt/ros/noetic/setup.bash" >> /etc/bash.bashrc
 
 # Hush debconf(Debian package configuration system) complaints and interactive prompt
 RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
