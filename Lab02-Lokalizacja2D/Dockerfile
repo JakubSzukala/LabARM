@@ -57,5 +57,6 @@ WORKDIR /catkin_ws/
 RUN addgroup --gid $GROUP_ID user
 RUN adduser --disabled-password --gecos '' --uid $USER_ID --gid $GROUP_ID user
 RUN chgrp -R $GROUP_ID /opt/ros/noetic && chgrp -R $GROUP_ID /catkin_ws
+RUN chown -R $USER_ID /opt/ros/noetic && chown -R $USER_ID /catkin_ws
 
 USER user
